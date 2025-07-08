@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <title>OD Digital</title>
   <style>
-    body {
+    html, body {
       margin: 0;
       padding: 0;
       font-family: sans-serif;
@@ -12,12 +12,77 @@
       color: #333;
     }
 
+    /* === ASCII LOADING SCREEN === */
+    #loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: black;
+      color: lime;
+      font-family: "Courier New", monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .ascii {
+      white-space: pre;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    .dots::after {
+      content: '';
+      animation: dots 1.2s infinite steps(3, end);
+    }
+
+    @keyframes dots {
+      0%   { content: ''; }
+      33%  { content: '.'; }
+      66%  { content: '..'; }
+      100% { content: '...'; }
+    }
+
+    /* === Fade In Site === */
+    #site {
+      opacity: 0;
+      animation: fadeIn 1.2s ease-in-out 2s forwards;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    /* === Banner === */
     .banner {
-      background: #f2f2f2;
-      padding: 12px 20px;
-      text-align: center;
-      font-size: 14px;
-      border-bottom: 1px solid #ddd;
+      background: linear-gradient(to bottom, #cce5ff, #99ccff);
+      padding: 10px 0;
+      font-size: 15px;
+      font-family: "Courier New", Courier, monospace;
+      color: #000080;
+      border-bottom: 2px solid #666;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      text-shadow: 0 1px 0 #fff;
+      font-weight: bold;
+    }
+
+    .banner pre {
+      margin: 0;
+      display: inline;
+    }
+
+    .cursor {
+      animation: blink 1s steps(1) infinite;
+      font-weight: bold;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      50.01%, 100% { opacity: 0; }
     }
 
     .container {
@@ -55,27 +120,49 @@
 </head>
 
 <body>
-  <div class="banner">
-    📢 New single "OD.mp3" drops this Friday — stay tuned!
+  <!-- ASCII Loading Screen -->
+  <div id="loading-screen">
+    <div class="ascii">OD DIGITAL SYSTEM BOOT v1.0</div>
+    <div class="dots">Loading</div>
   </div>
 
-  <div class="container">
-    <img src="iamge8.gif" alt="Glitching iPod" class="main-image" />
+  <!-- Main Site -->
+  <div id="site">
+    <!-- Banner -->
+    <div class="banner">
+      <marquee behavior="scroll" direction="left" scrollamount="4">
+        <pre><code>Discover exclusive beats and instrumentals on BeatStars – your one-stop platform for music collaboration, licensing, and distribution<span class="cursor">|</span></code></pre>
+      </marquee>
+    </div>
 
-    <div class="buttons">
-      <a href="https://www.beatstars.com/oddigital" target="_blank" rel="noopener noreferrer" class="button-rollover">
-        <img src="BeatST.png" alt="BeatStars" />
-      </a>
-      <a href="https://www.instagram.com/o.d.digital/?hl=en" target="_blank" rel="noopener noreferrer" class="button-rollover">
-        <img src="Insta.png" alt="Instagram" />
-      </a>
-      <a href="#" class="button-rollover" onclick="openContactForm(); return false;">
-        <img src="contact.png" alt="Contact" />
-      </a>
+    <!-- Layout -->
+    <div class="container">
+      <!-- Glitch Image -->
+      <img src="iamge8.gif" alt="Glitching iPod" class="main-image" />
+
+      <!-- Buttons -->
+      <div class="buttons">
+        <a href="https://www.beatstars.com/oddigital" target="_blank" class="button-rollover">
+          <img src="BeatST.png" alt="BeatStars" />
+        </a>
+        <a href="https://www.instagram.com/o.d.digital/?hl=en" target="_blank" class="button-rollover">
+          <img src="Insta.png" alt="Instagram" />
+        </a>
+        <a href="#" class="button-rollover" onclick="openContactForm(); return false;">
+          <img src="contact.png" alt="Contact" />
+        </a>
+      </div>
     </div>
   </div>
 
+  <!-- Contact Form -->
   <script>
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        document.getElementById("loading-screen").style.display = "none";
+      }, 2000);
+    });
+
     function openContactForm() {
       const contactWindow = window.open("", "ContactForm", "width=400,height=550");
       if (!contactWindow) {
