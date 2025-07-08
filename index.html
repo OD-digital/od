@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <div style="display: flex; justify-content: center; align-items: center; padding: 48px; gap: 48px; flex-wrap: wrap;">
+
+      <!-- Left Column: Vertical Button Stack -->
+      <div style="display: flex; flex-direction: column; gap: 24px;">
+        <a href="#" class="button-rollover">
+          <img src="B_button.jpg" data-hover="B_button.gif" alt="BeatStars" style="width: 144px;" />
+        </a>
+        <a href="#" class="button-rollover">
+          <img src="B_button-2.jpg" data-hover="B_button-2.gif" alt="Contacts" style="width: 144px;" />
+        </a>
+        <a href="#" class="button-rollover">
+          <img src="B_button-3.jpg" data-hover="B_button-3.gif" alt="Instagram" style="width: 144px;" />
+        </a>
+      </div>
+
+      <!-- Center: Glitch GIF -->
+      <img src="iamge8.gif" alt="Glitching iPod" style="width: 480px; max-width: 100%;" />
+    </div>
+
+    <style>
+      .button-rollover img {
+        transition: all 0.25s ease;
+      }
+
+      .button-rollover:hover img {
+        transform: scale(1.07);
+        filter: brightness(1.1);
+        cursor: pointer;
+      }
+    </style>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Hover image swap
+        document.querySelectorAll('.button-rollover img').forEach(img => {
+          const original = img.src;
+          const hover = img.getAttribute('data-hover');
+          img.addEventListener('mouseover', () => img.src = hover);
+          img.addEventListener('mouseout', () => img.src = original);
+        });
+      });
+    </script>
+  </body>
+</html>
