@@ -1,47 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
-  <body>
-    <div style="display: flex; justify-content: center; align-items: center; padding: 48px; gap: 48px; flex-wrap: wrap;">
+<head>
+  <meta charset="UTF-8" />
+  <title>OD Digital</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      background: #fff;
+      color: #333;
+    }
 
-      <!-- Left Column: Vertical Button Stack -->
-      <div style="display: flex; flex-direction: column; gap: 24px;">
-        <a href="#" class="button-rollover">
-          <img src="B_button.jpg" data-hover="B_button.gif" alt="BeatStars" style="width: 144px;" />
-        </a>
-        <a href="#" class="button-rollover">
-          <img src="B_button-2.jpg" data-hover="B_button-2.gif" alt="Contacts" style="width: 144px;" />
-        </a>
-        <a href="#" class="button-rollover">
-          <img src="B_button-3.jpg" data-hover="B_button-3.gif" alt="Instagram" style="width: 144px;" />
-        </a>
-      </div>
+    .banner {
+      background: #f2f2f2;
+      padding: 12px 20px;
+      text-align: center;
+      font-size: 14px;
+      border-bottom: 1px solid #ddd;
+    }
 
-      <!-- Center: Glitch GIF -->
-      <img src="iamge8.gif" alt="Glitching iPod" style="width: 480px; max-width: 100%;" />
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 48px;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .button-rollover img {
+      width: 80px;
+      height: 80px;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .button-rollover:hover img {
+      transform: scale(1.1);
+      filter: brightness(1.2);
+    }
+
+    .main-image {
+      width: 480px;
+      max-width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Banner -->
+  <div class="banner">
+    📢 New single "OD.mp3" drops this Friday — stay tuned!
+  </div>
+
+  <!-- Layout -->
+  <div class="container">
+    <!-- Center Glitch Image -->
+    <img src="iamge8.gif" alt="Glitching iPod" class="main-image" />
+
+    <!-- Right Button Stack -->
+    <div class="buttons">
+      <a href="https://www.beatstars.com/oddigital" target="_blank" rel="noopener noreferrer" class="button-rollover">
+        <img src="BeatST.png" alt="BeatStars" />
+      </a>
+      <a href="https://www.instagram.com/o.d.digital/?hl=en" target="_blank" rel="noopener noreferrer" class="button-rollover">
+        <img src="Insta.png" alt="Instagram" />
+      </a>
+      <a href="#" class="button-rollover" onclick="openContactForm(); return false;">
+        <img src="contact.png" alt="Contact" />
+      </a>
     </div>
+  </div>
 
-    <style>
-      .button-rollover img {
-        transition: all 0.25s ease;
+  <!-- Contact Form Script -->
+  <script>
+    function openContactForm() {
+      const contactWindow = window.open("", "ContactForm", "width=400,height=580");
+      if (!contactWindow) {
+        alert("Popup blocked! Please allow popups for this site.");
+        return;
       }
 
-      .button-rollover:hover img {
-        transform: scale(1.07);
-        filter: brightness(1.1);
-        cursor: pointer;
-      }
-    </style>
+      const html = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Me</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 30px;
+      background: #fff;
+      color: #111;
+    }
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: black;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #333;
+    }
+    #thankyou {
+      font-size: 15px;
+      line-height: 1.6;
+      font-weight: normal;
+      color: #111;
+      display: none;
+    }
+    a {
+      color: #111;
+      text-decoration: underline;
+    }
+    .intro {
+      font-size: 14px;
+      margin-bottom: 24px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <h2>Contact Me</h2>
+  <div class="intro">
+    ✉️ Let’s connect! Fill out the form below or email me directly at
+    <a href="mailto:oliverdalemanproductions@gmail.com">oliverdalemanproductions@gmail.com</a>
+  </div>
+  <form id="contactForm">
+    <label for="name">Name</label>
+    <input type="text" name="name" required />
+    <label for="message">Message</label>
+    <textarea name="message" rows="6" required></textarea>
+    <button type="submit">Send</button>
+  </form>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        // Hover image swap
-        document.querySelectorAll('.button-rollover img').forEach(img => {
-          const original = img.src;
-          const hover = img.getAttribute('data-hover');
-          img.addEventListener('mouseover', () => img.src = hover);
-          img.addEventListener('mouseout', () => img.src = original);
-        });
-      });
-    </script>
-  </body>
+  <div id="thankyou">
+    ✅ Thank you for your interest.<br><br>
+    If you want to collaborate or just say hello,<br>
+    feel free to email me at<br>
+    <a href="mailto:oliverdalemanproductions@gmail.com">oliverdalemanproductions@gmail.com</a><br>
+    or just send me a message here!
+  </div>
+
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const data = new FormData(form);
+      fetch('https://formspree.io/f/xjkrqybd', {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      }).then(res => {
+        if (res.ok) {
+          form.style.display = 'none';
+          document.querySelector('.intro').style.display = 'none';
+          document.getElementById('thankyou').style.display = 'block';
+        } else {
+          alert('Submission failed.');
+        }
+      }).catch(() => alert('Error sending message.'));
+    });
+  <\/script>
+</body>
+</html>`;
+
+      contactWindow.document.open();
+      contactWindow.document.write(html);
+      contactWindow.document.close();
+    }
+  </script>
+</body>
 </html>
