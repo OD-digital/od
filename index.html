@@ -12,7 +12,6 @@
       color: #333;
     }
 
-    /* === ASCII LOADING SCREEN === */
     #loading-screen {
       position: fixed;
       top: 0;
@@ -47,7 +46,6 @@
       100% { content: '...'; }
     }
 
-    /* === Fade In Site === */
     #site {
       opacity: 0;
       animation: fadeIn 1.2s ease-in-out 2s forwards;
@@ -57,7 +55,6 @@
       to { opacity: 1; }
     }
 
-    /* === Banner === */
     .banner {
       background: linear-gradient(to bottom, #cce5ff, #99ccff);
       padding: 10px 0;
@@ -97,18 +94,28 @@
     .buttons {
       display: flex;
       flex-direction: column;
+      align-items: center;
       gap: 24px;
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.8);
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      padding: 12px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
     }
 
     .button-rollover img {
       width: 80px;
       height: 80px;
-      transition: all 0.25s ease;
+      transition: transform 0.2s ease;
       cursor: pointer;
     }
 
-    .button-rollover:hover img {
-      transform: scale(1.1);
+    .button-rollover img:hover {
+      transform: scale(1.2);
       filter: brightness(1.2);
     }
 
@@ -120,42 +127,35 @@
 </head>
 
 <body>
-  <!-- ASCII Loading Screen -->
   <div id="loading-screen">
     <div class="ascii">OD DIGITAL SYSTEM BOOT v1.0</div>
     <div class="dots">Loading</div>
   </div>
 
-  <!-- Main Site -->
   <div id="site">
-    <!-- Banner -->
     <div class="banner">
       <marquee behavior="scroll" direction="left" scrollamount="4">
         <pre><code>Discover exclusive beats and instrumentals on BeatStars – your one-stop platform for music collaboration, licensing, and distribution<span class="cursor">|</span></code></pre>
       </marquee>
     </div>
 
-    <!-- Layout -->
     <div class="container">
-      <!-- Glitch Image -->
       <img src="iamge8.gif" alt="Glitching iPod" class="main-image" />
+    </div>
 
-      <!-- Buttons -->
-      <div class="buttons">
-        <a href="https://www.beatstars.com/oddigital" target="_blank" class="button-rollover">
-          <img src="BeatST.png" alt="BeatStars" />
-        </a>
-        <a href="https://www.instagram.com/o.d.digital/?hl=en" target="_blank" class="button-rollover">
-          <img src="Insta.png" alt="Instagram" />
-        </a>
-        <a href="#" class="button-rollover" onclick="openContactForm(); return false;">
-          <img src="contact.png" alt="Contact" />
-        </a>
-      </div>
+    <div class="buttons">
+      <a href="https://www.beatstars.com/oddigital" target="_blank" class="button-rollover">
+        <img src="BeatST.png" alt="BeatStars" />
+      </a>
+      <a href="https://www.instagram.com/o.d.digital/?hl=en" target="_blank" class="button-rollover">
+        <img src="Insta.png" alt="Instagram" />
+      </a>
+      <a href="#" class="button-rollover" onclick="openContactForm(); return false;">
+        <img src="contact.png" alt="Contact" />
+      </a>
     </div>
   </div>
 
-  <!-- Contact Form -->
   <script>
     window.addEventListener("load", () => {
       setTimeout(() => {
@@ -170,95 +170,7 @@
         return;
       }
 
-      const html = `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Contact Me</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      margin: 30px;
-      background: #fff;
-      color: #111;
-    }
-    label {
-      display: block;
-      margin-bottom: 10px;
-      font-weight: bold;
-    }
-    input, textarea {
-      width: 100%;
-      padding: 8px;
-      margin-bottom: 20px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
-    button {
-      padding: 10px 20px;
-      background-color: black;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #333;
-    }
-    #thankyou {
-      font-size: 15px;
-      line-height: 1.6;
-      font-weight: normal;
-      color: #111;
-      display: none;
-    }
-    a {
-      color: #111;
-      text-decoration: underline;
-    }
-  </style>
-</head>
-<body>
-  <h2>Contact Me</h2>
-  <form id="contactForm">
-    <label for="name">Name</label>
-    <input type="text" name="name" required />
-    <label for="message">Message</label>
-    <textarea name="message" rows="6" required></textarea>
-    <button type="submit">Send</button>
-  </form>
-
-  <div id="thankyou">
-    ✅ Thank you for your interest.<br><br>
-    If you want to collaborate or just say hello,<br>
-    feel free to email me at<br>
-    <a href="mailto:oliverdalemanproductions@gmail.com">oliverdalemanproductions@gmail.com</a><br>
-    or just send me a message here!
-  </div>
-
-  <script>
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const form = e.target;
-      const data = new FormData(form);
-      fetch('https://formspree.io/f/xjkrqybd', {
-        method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
-      }).then(res => {
-        if (res.ok) {
-          form.style.display = 'none';
-          document.getElementById('thankyou').style.display = 'block';
-        } else {
-          alert('Submission failed.');
-        }
-      }).catch(() => alert('Error sending message.'));
-    });
-  <\/script>
-</body>
-</html>`;
+      const html = `...`;
       contactWindow.document.open();
       contactWindow.document.write(html);
       contactWindow.document.close();
