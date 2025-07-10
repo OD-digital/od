@@ -87,8 +87,12 @@
       justify-content: center;
       align-items: center;
       padding: 48px;
-      gap: 48px;
       flex-wrap: wrap;
+    }
+
+    .main-image {
+      width: 528px;
+      max-width: 100%;
     }
 
     .buttons {
@@ -98,34 +102,58 @@
       gap: 24px;
       position: fixed;
       right: 20px;
-      top: 50%;
+      top: calc(50% - 30px);
       transform: translateY(-50%);
-      background: rgba(255,255,255,0.8);
+      background: rgba(255,255,255,0.95);
       border: 1px solid #ccc;
       border-radius: 12px;
       padding: 12px;
       box-shadow: 0 0 12px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    .button-rollover {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.2s ease;
     }
 
     .button-rollover img {
-      width: 80px;
-      height: 80px;
+      width: 73.6px;
+      height: 73.6px;
       transition: transform 0.2s ease;
       cursor: pointer;
     }
 
-    .button-rollover img:hover {
-      transform: scale(1.2);
-      filter: brightness(1.2);
+    .button-rollover:hover {
+      transform: scale(1.4);
     }
 
-    .main-image {
-      width: 480px;
-      max-width: 100%;
+    @media (max-width: 768px) {
+      .buttons {
+        position: relative;
+        flex-direction: row;
+        justify-content: center;
+        margin: 20px auto 0 auto;
+        top: 0;
+        right: 0;
+        transform: none;
+        border-radius: 12px;
+        padding: 8px;
+      }
+
+      .button-rollover img {
+        width: 60px;
+        height: 60px;
+      }
+
+      .main-image {
+        width: 90vw;
+      }
     }
   </style>
 </head>
-
 <body>
   <div id="loading-screen">
     <div class="ascii">OD DIGITAL SYSTEM BOOT v1.0</div>
@@ -139,10 +167,6 @@
       </marquee>
     </div>
 
-    <div class="container">
-      <img src="iamge8.gif" alt="Glitching iPod" class="main-image" />
-    </div>
-
     <div class="buttons">
       <a href="https://www.beatstars.com/oddigital" target="_blank" class="button-rollover">
         <img src="BeatST.png" alt="BeatStars" />
@@ -154,6 +178,10 @@
         <img src="contact.png" alt="Contact" />
       </a>
     </div>
+
+    <div class="container"><div class="image-wrapper">
+      <img src="iamge8.gif" alt="Glitching iPod" class="main-image" /></div>
+    </div>
   </div>
 
   <script>
@@ -164,13 +192,95 @@
     });
 
     function openContactForm() {
-      const contactWindow = window.open("", "ContactForm", "width=400,height=550");
+      const contactWindow = window.open("", "ContactForm", "width=400,height=600");
       if (!contactWindow) {
         alert("Popup blocked! Please allow popups for this site.");
         return;
       }
 
-      const html = `...`;
+      const html = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Me</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 30px;
+      background: #fff;
+      color: #111;
+    }
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: black;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #333;
+    }
+    #thankyou {
+      font-size: 15px;
+      line-height: 1.6;
+      display: none;
+    }
+    a {
+      color: #111;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h2>Contact Me</h2>
+  <form id="contactForm">
+    <label for="name">Name</label>
+    <input type="text" name="name" required />
+    <label for="message">Message</label>
+    <textarea name="message" rows="6" required></textarea>
+    <button type="submit">Send</button>
+  </form>
+
+  <div id="thankyou">
+    ✅ Thank you, your message has been sent successfully.
+  </div>
+
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const data = new FormData(form);
+      fetch('https://formspree.io/f/xjkrqybd', {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      }).then(res => {
+        if (res.ok) {
+          form.style.display = 'none';
+          document.getElementById('thankyou').style.display = 'block';
+        } else {
+          alert('Submission failed.');
+        }
+      }).catch(() => alert('Error sending message.'));
+    });
+  <\/script>
+</body>
+</html>`;
       contactWindow.document.open();
       contactWindow.document.write(html);
       contactWindow.document.close();
