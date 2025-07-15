@@ -96,6 +96,12 @@
       50.01%, 100% { opacity: 0; }
     }
 
+    .main-layout {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
     .container {
       display: flex;
       justify-content: center;
@@ -115,15 +121,15 @@
       flex-direction: column;
       align-items: center;
       gap: 24px;
-      position: fixed;
-      right: 20px;
-      top: 50%;
-      transform: translateY(-50%);
       background: rgba(255,255,255,0.95);
       border: 1px solid #ccc;
       border-radius: 12px;
       padding: 12px;
       box-shadow: 0 0 12px rgba(0,0,0,0.1);
+      position: fixed;
+      right: 0; /* Flush right edge */
+      top: 50%;
+      transform: translateY(-50%);
     }
 
     .button-rollover {
@@ -155,10 +161,6 @@
         font-size: 12px;
       }
 
-      .banner {
-        white-space: nowrap;
-      }
-
       .buttons {
         position: relative;
         flex-direction: row;
@@ -176,7 +178,6 @@
 
       .main-image {
         width: 90vw;
-        height: auto;
       }
 
       .container {
@@ -185,13 +186,38 @@
     }
 
     @media (max-width: 768px) and (orientation: landscape) {
-      .main-image {
-        width: auto;
-        height: 100px; /* Small enough to match sidebar height */
+      .main-layout {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
       }
 
       .container {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+      }
+
+      .main-image {
+        width: auto;
+        height: calc(60px * 3 + 48px); /* 3 icons + gaps + padding */
+      }
+
+      .buttons {
+        position: fixed;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        flex-direction: column;
+        margin: 0;
+        background: rgba(255,255,255,0.95);
+        border-radius: 12px;
         padding: 12px;
+      }
+
+      .button-rollover img {
+        width: 60px;
+        height: 60px;
       }
     }
   </style>
@@ -211,21 +237,23 @@
       </marquee>
     </div>
 
-    <div class="buttons">
-      <a href="https://www.beatstars.com/oddigital" target="_blank" class="button-rollover">
-        <img src="BeatST.png" alt="BeatStars" />
-      </a>
-      <a href="https://www.instagram.com/o.d.digital/?hl=en" target="_blank" class="button-rollover">
-        <img src="Insta.png" alt="Instagram" />
-      </a>
-      <a href="#" class="button-rollover" onclick="openContactForm(); return false;">
-        <img src="contact.png" alt="Contact" />
-      </a>
-    </div>
+    <div class="main-layout">
+      <div class="container">
+        <div class="image-wrapper">
+          <img src="iamge8.gif" alt="Glitching iPod" class="main-image" />
+        </div>
+      </div>
 
-    <div class="container">
-      <div class="image-wrapper">
-        <img src="iamge8.gif" alt="Glitching iPod" class="main-image" />
+      <div class="buttons">
+        <a href="https://www.beatstars.com/oddigital" target="_blank" class="button-rollover">
+          <img src="BeatST.png" alt="BeatStars" />
+        </a>
+        <a href="https://www.instagram.com/o.d.digital/?hl=en" target="_blank" class="button-rollover">
+          <img src="Insta.png" alt="Instagram" />
+        </a>
+        <a href="#" class="button-rollover" onclick="openContactForm(); return false;">
+          <img src="contact.png" alt="Contact" />
+        </a>
       </div>
     </div>
   </div>
