@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <title>OD Digital</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
   <style>
     html, body {
       margin: 0;
@@ -127,9 +127,10 @@
       padding: 12px;
       box-shadow: 0 0 12px rgba(0,0,0,0.1);
       position: fixed;
-      right: 0; /* Flush right edge */
+      right: 0; /* Flush to right edge */
       top: 50%;
       transform: translateY(-50%);
+      order: 0;
     }
 
     .button-rollover {
@@ -161,6 +162,7 @@
         font-size: 12px;
       }
 
+      /* General mobile styles */
       .buttons {
         position: relative;
         flex-direction: row;
@@ -169,6 +171,7 @@
         top: 0;
         right: 0;
         transform: none;
+        order: 0;
       }
 
       .button-rollover img {
@@ -182,6 +185,7 @@
 
       .container {
         padding: 24px;
+        order: 1;
       }
     }
 
@@ -196,28 +200,60 @@
         flex: 1;
         display: flex;
         justify-content: center;
+        order: 1;
       }
 
       .main-image {
         width: auto;
-        height: calc(60px * 3 + 48px); /* 3 icons + gaps + padding */
+        height: 180px;
       }
 
       .buttons {
         position: fixed;
-        right: 0;
+        right: 0; /* Flush right edge */
         top: 50%;
         transform: translateY(-50%);
         flex-direction: column;
         margin: 0;
-        background: rgba(255,255,255,0.95);
-        border-radius: 12px;
-        padding: 12px;
+        order: 0;
       }
 
       .button-rollover img {
         width: 60px;
         height: 60px;
+      }
+    }
+
+    /* Portrait mobile: buttons bar moves to top above image */
+    @media (max-width: 768px) and (orientation: portrait) {
+      .main-layout {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .buttons {
+        position: relative;
+        flex-direction: row;
+        justify-content: center;
+        margin: 20px auto 0;
+        top: auto;
+        right: auto;
+        transform: none;
+        order: 0; /* show first */
+      }
+
+      .container {
+        order: 1; /* show second */
+        padding: 24px;
+      }
+
+      .button-rollover img {
+        width: 60px;
+        height: 60px;
+      }
+
+      .main-image {
+        width: 90vw;
       }
     }
   </style>
@@ -233,17 +269,14 @@
   <div id="site">
     <div class="banner">
       <marquee behavior="scroll" direction="left" scrollamount="4">
-        <code>Discover exclusive beats and instrumentals on BeatStars – your one-stop platform for music collaboration, licensing, and distribution<span class="cursor">|</span></code>
+        <code>
+          Discover exclusive beats and instrumentals on BeatStars – your one-stop platform for music collaboration, licensing, and distribution
+          <span class="cursor">|</span>
+        </code>
       </marquee>
     </div>
 
     <div class="main-layout">
-      <div class="container">
-        <div class="image-wrapper">
-          <img src="iamge8.gif" alt="Glitching iPod" class="main-image" />
-        </div>
-      </div>
-
       <div class="buttons">
         <a href="https://www.beatstars.com/oddigital" target="_blank" class="button-rollover">
           <img src="BeatST.png" alt="BeatStars" />
@@ -254,6 +287,12 @@
         <a href="#" class="button-rollover" onclick="openContactForm(); return false;">
           <img src="contact.png" alt="Contact" />
         </a>
+      </div>
+
+      <div class="container">
+        <div class="image-wrapper">
+          <img src="iamge8.gif" alt="Glitching iPod" class="main-image" />
+        </div>
       </div>
     </div>
   </div>
