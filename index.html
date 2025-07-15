@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <title>OD Digital</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
   <style>
     html, body {
       margin: 0;
@@ -34,6 +34,7 @@
       white-space: pre-wrap;
       font-size: 14px;
       margin-bottom: 20px;
+      word-break: break-word;
     }
 
     .dots::after {
@@ -70,11 +71,19 @@
       box-shadow: 0 2px 4px rgba(0,0,0,0.2);
       text-shadow: 0 1px 0 #fff;
       font-weight: bold;
+      overflow: hidden;
+      white-space: nowrap;
     }
 
-    .banner pre {
-      margin: 0;
-      display: inline;
+    .banner marquee {
+      display: inline-block;
+      width: 100%;
+      white-space: nowrap;
+    }
+
+    .banner code {
+      display: inline-block;
+      white-space: nowrap;
     }
 
     .cursor {
@@ -98,6 +107,7 @@
     .main-image {
       width: 528px;
       max-width: 100%;
+      display: block;
     }
 
     .buttons {
@@ -114,7 +124,6 @@
       border-radius: 12px;
       padding: 12px;
       box-shadow: 0 0 12px rgba(0,0,0,0.1);
-      transition: all 0.3s ease;
     }
 
     .button-rollover {
@@ -129,13 +138,36 @@
       height: 73.6px;
       transition: transform 0.2s ease;
       cursor: pointer;
+      display: block;
     }
 
-    .button-rollover:hover {
-      transform: scale(1.4);
+    @media (hover: hover) {
+      .button-rollover:hover img {
+        transform: scale(1.4);
+      }
     }
 
     @media (max-width: 768px) {
+      #loading-screen {
+        padding: 40px 20px;
+      }
+
+      .ascii {
+        font-size: 12px;
+      }
+
+      .banner {
+        white-space: nowrap;
+      }
+
+      .banner marquee {
+        white-space: nowrap;
+      }
+
+      .banner code {
+        white-space: nowrap;
+      }
+
       .buttons {
         position: relative;
         flex-direction: row;
@@ -144,8 +176,6 @@
         top: 0;
         right: 0;
         transform: none;
-        border-radius: 12px;
-        padding: 8px 12px;
       }
 
       .button-rollover img {
@@ -161,6 +191,48 @@
         padding: 24px;
       }
     }
+
+    /* Landscape mobile: make iPod image same height as buttons container */
+    @media (max-width: 768px) and (orientation: landscape) {
+      body, html {
+        overflow-x: hidden;
+      }
+      .buttons {
+        position: static;
+        flex-direction: column;
+        width: 68px;
+        gap: 24px;
+        padding: 0;
+        border: none;
+        background: transparent;
+        box-shadow: none;
+        transform: none;
+        top: auto;
+        right: auto;
+        align-items: center;
+      }
+      .button-rollover img {
+        width: 60px;
+        height: 60px;
+      }
+      .container {
+        flex: 1;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .main-image {
+        height: 192px; /* 3 buttons * (60px height + 24px gap but gap doesn't add height directly so safe) */
+        max-height: 192px;
+        width: auto;
+        max-width: 100%;
+        object-fit: contain;
+        flex-shrink: 1;
+        display: block;
+      }
+    }
   </style>
 </head>
 <body>
@@ -174,7 +246,7 @@
   <div id="site">
     <div class="banner">
       <marquee behavior="scroll" direction="left" scrollamount="4">
-        <pre><code>Discover exclusive beats and instrumentals on BeatStars – your one-stop platform for music collaboration, licensing, and distribution<span class="cursor">|</span></code></pre>
+        <code>Discover exclusive beats and instrumentals on BeatStars – your one-stop platform for music collaboration, licensing, and distribution<span class="cursor">|</span></code>
       </marquee>
     </div>
 
@@ -252,6 +324,27 @@
         document.getElementById('loading-screen').style.display = 'none';
         pixelBreak();
       }, 1200);
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.button-rollover').forEach(btn => {
+        const img = btn.querySelector('img');
+        if (!img) return;
+
+        btn.addEventListener('touchstart', () => {
+          img.style.transition = 'transform 0.1s ease';
+          img.style.transform = 'scale(1.4)';
+        });
+
+        const resetScale = () => {
+          img.style.transition = 'transform 0.2s ease';
+          img.style.transform = 'scale(1)';
+        };
+
+        btn.addEventListener('touchend', resetScale);
+        btn.addEventListener('touchcancel', resetScale);
+        btn.addEventListener('click', resetScale);
+      });
     });
 
     function openContactForm() {
