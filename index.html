@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <title>OD Digital</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
     html, body {
       margin: 0;
@@ -107,7 +107,7 @@
     .main-image {
       width: 528px;
       max-width: 100%;
-      display: block;
+      height: auto;
     }
 
     .buttons {
@@ -138,7 +138,6 @@
       height: 73.6px;
       transition: transform 0.2s ease;
       cursor: pointer;
-      display: block;
     }
 
     @media (hover: hover) {
@@ -160,14 +159,6 @@
         white-space: nowrap;
       }
 
-      .banner marquee {
-        white-space: nowrap;
-      }
-
-      .banner code {
-        white-space: nowrap;
-      }
-
       .buttons {
         position: relative;
         flex-direction: row;
@@ -185,6 +176,7 @@
 
       .main-image {
         width: 90vw;
+        height: auto;
       }
 
       .container {
@@ -192,45 +184,14 @@
       }
     }
 
-    /* Landscape mobile: make iPod image same height as buttons container */
     @media (max-width: 768px) and (orientation: landscape) {
-      body, html {
-        overflow-x: hidden;
-      }
-      .buttons {
-        position: static;
-        flex-direction: column;
-        width: 68px;
-        gap: 24px;
-        padding: 0;
-        border: none;
-        background: transparent;
-        box-shadow: none;
-        transform: none;
-        top: auto;
-        right: auto;
-        align-items: center;
-      }
-      .button-rollover img {
-        width: 60px;
-        height: 60px;
-      }
-      .container {
-        flex: 1;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
       .main-image {
-        height: 192px; /* 3 buttons * (60px height + 24px gap but gap doesn't add height directly so safe) */
-        max-height: 192px;
         width: auto;
-        max-width: 100%;
-        object-fit: contain;
-        flex-shrink: 1;
-        display: block;
+        height: 100px; /* Small enough to match sidebar height */
+      }
+
+      .container {
+        padding: 12px;
       }
     }
   </style>
