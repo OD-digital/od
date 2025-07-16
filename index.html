@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
+<!-- saved from url=(0071)file:///Volumes/OD-SSD/FIles/Desktop/Folders/od-digital-site/index.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
   <title>OD Digital</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="./index_files/css2" rel="stylesheet">
   <style>
     html, body {
       margin: 0;
@@ -256,15 +256,29 @@
         width: 90vw;
       }
     }
-  </style>
+  @media (max-width: 768px) and (orientation: landscape) {
+  .buttons {
+    position: fixed !important;
+    top: 48px !important; /* subtle move down */
+    right: 0 !important;
+    transform: none !important;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  }
+}
+
+</style>
 </head>
 <body>
-  <div id="loading-screen">
+  <div id="loading-screen" style="display: none;">
     <div class="ascii">OD DIGITAL SYSTEM BOOT v1.0</div>
     <div class="dots">Loading</div>
   </div>
 
-  <canvas id="pixel-canvas"></canvas>
+  <canvas id="pixel-canvas" width="653" height="304" style="display: none;"></canvas>
 
   <div id="site">
     <div class="banner">
@@ -279,19 +293,19 @@
     <div class="main-layout">
       <div class="buttons">
         <a href="https://www.beatstars.com/oddigital" target="_blank" class="button-rollover">
-          <img src="BeatST.png" alt="BeatStars" />
+          <img src="./index_files/BeatST.png" alt="BeatStars">
         </a>
         <a href="https://www.instagram.com/o.d.digital/?hl=en" target="_blank" class="button-rollover">
-          <img src="Insta.png" alt="Instagram" />
+          <img src="./index_files/Insta.png" alt="Instagram">
         </a>
-        <a href="#" class="button-rollover" onclick="openContactForm(); return false;">
-          <img src="contact.png" alt="Contact" />
+        <a href="file:///Volumes/OD-SSD/FIles/Desktop/Folders/od-digital-site/index.html#" class="button-rollover" onclick="openContactForm(); return false;">
+          <img src="./index_files/contact.png" alt="Contact">
         </a>
       </div>
 
       <div class="container">
         <div class="image-wrapper">
-          <img src="iamge8.gif" alt="Glitching iPod" class="main-image" />
+          <img src="./index_files/iamge8.gif" alt="Glitching iPod" class="main-image">
         </div>
       </div>
     </div>
@@ -470,5 +484,6 @@
       contactWindow.document.close();
     }
   </script>
-</body>
-</html>
+
+
+</body></html>
