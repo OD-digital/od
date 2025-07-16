@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<!-- saved from url=(0020)http://oddigital.us/ -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="chrome-extension://fgddmllnllkalaagkghckoinaemmogpe/src/scripts/content/location-spoofing.js"></script>
-  
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
   <title>OD Digital</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="./index_files/css2" rel="stylesheet">
@@ -21,7 +21,7 @@
       background: #00f;
       color: white;
       font-family: 'Press Start 2P', monospace;
-      display: flex;
+      display: flex; /* <<-- make it show by default! */
       flex-direction: column;
       align-items: center;
       justify-content: center;
@@ -55,10 +55,7 @@
       width: 100%;
       height: 100%;
       z-index: 9999;
-    }
-
-    #site {
-      opacity: 1;
+      display: none;
     }
 
     .banner {
@@ -127,10 +124,9 @@
       padding: 12px;
       box-shadow: 0 0 12px rgba(0,0,0,0.1);
       position: fixed;
-      right: 0; /* Flush to right edge */
+      right: 0;
       top: 50%;
       transform: translateY(-50%);
-      order: 0;
     }
 
     .button-rollover {
@@ -162,7 +158,6 @@
         font-size: 12px;
       }
 
-      /* General mobile styles */
       .buttons {
         position: relative;
         flex-direction: row;
@@ -171,7 +166,6 @@
         top: 0;
         right: 0;
         transform: none;
-        order: 0;
       }
 
       .button-rollover img {
@@ -185,7 +179,6 @@
 
       .container {
         padding: 24px;
-        order: 1;
       }
     }
 
@@ -198,9 +191,7 @@
 
       .container {
         flex: 1;
-        display: flex;
         justify-content: center;
-        order: 1;
       }
 
       .main-image {
@@ -210,12 +201,10 @@
 
       .buttons {
         position: fixed;
-        right: 0; /* Flush right edge */
+        right: 0;
         top: 50%;
         transform: translateY(-50%);
         flex-direction: column;
-        margin: 0;
-        order: 0;
       }
 
       .button-rollover img {
@@ -224,7 +213,6 @@
       }
     }
 
-    /* Portrait mobile: buttons bar moves to top above image */
     @media (max-width: 768px) and (orientation: portrait) {
       .main-layout {
         flex-direction: column;
@@ -239,11 +227,9 @@
         top: auto;
         right: auto;
         transform: none;
-        order: 0; /* show first */
       }
 
       .container {
-        order: 1; /* show second */
         padding: 24px;
       }
 
@@ -256,29 +242,15 @@
         width: 90vw;
       }
     }
-  @media (max-width: 768px) and (orientation: landscape) {
-  .buttons {
-    position: fixed !important;
-    top: 48px !important; /* subtle move down */
-    right: 0 !important;
-    transform: none !important;
-    flex-direction: column;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 12px;
-    padding: 12px;
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
-  }
-}
-
-</style>
+  </style>
 </head>
 <body>
-  <div id="loading-screen" style="display: none;">
+  <div id="loading-screen">
     <div class="ascii">OD DIGITAL SYSTEM BOOT v1.0</div>
     <div class="dots">Loading</div>
   </div>
 
-  <canvas id="pixel-canvas" width="312" height="717" style="display: none;"></canvas>
+  <canvas id="pixel-canvas"></canvas>
 
   <div id="site">
     <div class="banner">
@@ -298,7 +270,7 @@
         <a href="https://www.instagram.com/o.d.digital/?hl=en" target="_blank" class="button-rollover">
           <img src="./index_files/Insta.png" alt="Instagram">
         </a>
-        <a href="http://oddigital.us/#" class="button-rollover" onclick="openContactForm(); return false;">
+        <a href="#" class="button-rollover" onclick="openContactForm(); return false;">
           <img src="./index_files/contact.png" alt="Contact">
         </a>
       </div>
@@ -323,6 +295,7 @@
     resize();
 
     function pixelBreak() {
+      canvas.style.display = 'block';
       const size = 80;
       const cols = Math.ceil(canvas.width / size);
       const rows = Math.ceil(canvas.height / size);
@@ -368,122 +341,27 @@
       }, 1200);
     });
 
-    document.addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('.button-rollover').forEach(btn => {
-        const img = btn.querySelector('img');
-        if (!img) return;
-
-        btn.addEventListener('touchstart', () => {
-          img.style.transition = 'transform 0.1s ease';
-          img.style.transform = 'scale(1.4)';
-        });
-
-        const resetScale = () => {
-          img.style.transition = 'transform 0.2s ease';
-          img.style.transform = 'scale(1)';
-        };
-
-        btn.addEventListener('touchend', resetScale);
-        btn.addEventListener('touchcancel', resetScale);
-        btn.addEventListener('click', resetScale);
-      });
-    });
-
     function openContactForm() {
       const contactWindow = window.open("", "ContactForm", "width=400,height=600");
       if (!contactWindow) {
         alert("Popup blocked! Please allow popups for this site.");
         return;
       }
-
       const html = `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Contact Me</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      margin: 30px;
-      background: #fff;
-      color: #111;
-    }
-    label {
-      display: block;
-      margin-bottom: 10px;
-      font-weight: bold;
-    }
-    input, textarea {
-      width: 100%;
-      padding: 8px;
-      margin-bottom: 20px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
-    button {
-      padding: 10px 20px;
-      background-color: black;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #333;
-    }
-    #thankyou {
-      font-size: 15px;
-      line-height: 1.6;
-      display: none;
-    }
-    a {
-      color: #111;
-      text-decoration: underline;
-    }
-  </style>
-</head>
-<body>
-  <h2>Contact Me</h2>
-  <form id="contactForm">
-    <label for="name">Name</label>
-    <input type="text" name="name" required />
-    <label for="message">Message</label>
-    <textarea name="message" rows="6" required></textarea>
-    <button type="submit">Send</button>
-  </form>
-
-  <div id="thankyou">
-    ✅ Thank you, your message has been sent successfully.
-  </div>
-
-  <script>
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const form = e.target;
-      const data = new FormData(form);
-      fetch('https://formspree.io/f/xjkrqybd', {
-        method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
-      }).then(res => {
-        if (res.ok) {
-          form.style.display = 'none';
-          document.getElementById('thankyou').style.display = 'block';
-        } else {
-          alert('Submission failed.');
-        }
-      }).catch(() => alert('Error sending message.'));
-    });
-  <\/script>
-</body>
-</html>`;
-      contactWindow.document.open();
+      <!DOCTYPE html>
+      <html lang="en">
+      <head><meta charset="UTF-8"><title>Contact</title></head>
+      <body>
+      <h2>Contact Me</h2>
+      <form>
+      <label>Name</label><input type="text"><br>
+      <label>Message</label><textarea></textarea><br>
+      <button>Send</button>
+      </form>
+      </body>
+      </html>`;
       contactWindow.document.write(html);
-      contactWindow.document.close();
     }
   </script>
-
-
-</body></html>
+</body>
+</html>
